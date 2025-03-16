@@ -7,33 +7,35 @@
 import { StringKeyValueType } from '../types';
 
 export const socialLinks: StringKeyValueType = {
-  facebook: 'https://www.facebook.com/vatsalsinghkv',
-  instagram: 'https://www.instagram.com/vatsalsinghkv',
-  twitter: 'https://twitter.com/vatsalsinghkv',
-  github: 'https://github.com/vatsalsinghkv',
-  linkedin: 'https://www.linkedin.com/in/vatsalsinghkv/',
+  facebook: '#',
+  instagram: '#',
+  twitter: '#',
+  github: 'https://github.com/Somanath2314',
+  linkedin: 'https://www.linkedin.com/in/somanath-mikali-0a6485259/',
 };
 
 export const author = {
-  name: 'Vatsal Singh',
-  email: 'vatsalsinghkv@gmail.com',
+  name: 'Somanath Mikali',
+  email: 'somanath.r.mikali@gmail.com',
 };
 
 export const seoData = {
-  title: 'Vatsal Singh | Front-End Developer',
+  title: 'Somanath Mikali | Full-Stack Developer',
   description:
-    'Vatsal Singh is a front-end developer who specializes in building (and occasionally designing) exceptional visual interfaces.',
+    'Somanath Mikali is a full-stack developer who specializes in building production grade websites, which can be easily deployed and scaled',
   author: author.name,
   image:
     'https://user-images.githubusercontent.com/68834718/217467445-0b0d2d63-f8ad-4702-8474-814eb2cbb3be.png',
   url: 'https://vatsalsinghkv.vercel.app/',
   keywords: [
-    'Vatsal',
-    'Vatsal Singh',
-    '@vatsalsinghkv',
+    'Somanath',
+    'Somnath',
+    'Somanath Mikali',
+    '@somanathmikali',
     'vatsalsinghkv',
     'Portfolio',
-    'Vatsal Portfolio ',
-    'Vatsal Singh Portfolio',
+    'Somanath mikali Portfolio ',
+    'Somanath Portfolio ',
+    'Somanath bms'
   ],
 };
