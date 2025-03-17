@@ -1,11 +1,11 @@
 'use client';
+
 import { navbarSection } from '@/lib/content/navbar';
 import { author } from '@/lib/content/portfolio';
 import useWindowWidth from '@/lib/hooks/use-window-width';
 import { getBreakpointsWidth } from '@/lib/utils/helper';
 
 import { Button, DarkModeButton, Link as CLink, NavButton } from '@/components';
-
 import { fadeIn, slideIn } from '@/styles/animations';
 
 import { motion } from 'framer-motion';
@@ -14,11 +14,7 @@ import { useEffect, useState } from 'react';
 
 /**
  * Hides the navbar while scrolling down
- * @param {Object} config
- * @param {String} [config.id=navbar] - id of navbar
- * @param {Number} [config.offset=100] - offset of navbar in px
  */
-
 const hideNavWhileScrolling = ({
   id = 'navbar',
   offset = 100,
@@ -28,21 +24,24 @@ const hideNavWhileScrolling = ({
   offset?: number;
   when: boolean;
 }) => {
+  if (typeof document === 'undefined' || typeof window === 'undefined') return;
+
   const nav = document.getElementById(id);
   if (!nav) return;
 
   let prevScrollPos = window.pageYOffset;
 
-  window.onscroll = () => {
+  const onScroll = () => {
     if (when) {
       const curScrollPos = window.pageYOffset;
-      if (prevScrollPos < curScrollPos) nav.style.top = `-${offset}px`;
-      else nav.style.top = '0';
+      nav.style.top = prevScrollPos < curScrollPos ? `-${offset}px` : '0';
       prevScrollPos = curScrollPos;
     }
   };
-};
 
+  window.addEventListener('scroll', onScroll);
+  return () => window.removeEventListener('scroll', onScroll);
+};
 type NavItemsProps = {
   href?: string;
   children: React.ReactNode;
@@ -50,7 +49,6 @@ type NavItemsProps = {
   delay: number;
   onClick?: (event: React.MouseEvent) => void;
 };
-
 const NavItem = ({ href, children, onClick, index, delay }: NavItemsProps) => {
   return (
     <motion.li
@@ -80,7 +78,10 @@ const Navbar = () => {
   const ANIMATION_DELAY = windowWidth <= md ? 0 : 0.8;
 
   useEffect(() => {
-    hideNavWhileScrolling({ when: !navbarCollapsed });
+    if (typeof window !== 'undefined') {
+      const cleanup = hideNavWhileScrolling({ when: !navbarCollapsed });
+      return cleanup;
+    }
   }, [navbarCollapsed]);
 
   return (

@@ -9,21 +9,16 @@ const Cursor = ({ className = '' }: Props) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    addEventListeners();
-    return () => removeEventListeners();
+    // Ensure we are running in the browser
+    if (typeof window !== 'undefined') {
+      const onMouseMove = (e: MouseEvent) => {
+        setPosition({ x: e.clientX, y: e.clientY });
+      };
+
+      window.addEventListener('mousemove', onMouseMove);
+      return () => window.removeEventListener('mousemove', onMouseMove);
+    }
   }, []);
-
-  const addEventListeners = () => {
-    document.addEventListener('mousemove', onMouseMove);
-  };
-
-  const removeEventListeners = () => {
-    document.removeEventListener('mousemove', onMouseMove);
-  };
-
-  const onMouseMove = (e: MouseEvent) => {
-    setPosition({ x: e.clientX, y: e.clientY });
-  };
 
   return (
     <div

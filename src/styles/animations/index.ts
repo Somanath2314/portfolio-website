@@ -7,6 +7,8 @@ import { Variants } from 'framer-motion';
  * @param {number} [delay=0] - in seconds
  * @returns {Variants} Variants
  */
+
+
 export const fadeIn = (delay = 0): Variants => ({
   hidden: {
     opacity: 0,

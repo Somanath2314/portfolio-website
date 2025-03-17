@@ -7,12 +7,12 @@ export const sectionVariants = slideUp({
   offset: 50,
 });
 
-export const getSectionAnimation = {
+export const getSectionAnimation = typeof window !== 'undefined' ? {
   variants: sectionVariants,
   initial: 'hidden',
   whileInView: 'show',
   viewport: { once: true },
-};
+} : {};
 
 export const projectVariants: Variants = {
   hidden: {

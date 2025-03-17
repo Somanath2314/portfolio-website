@@ -1,10 +1,15 @@
 'use client';
+
+import dynamic from 'next/dynamic';
+import { ListItem, SkillIcon } from '@/components';
+import { motion, MotionProps } from 'framer-motion';
 import { SoftwareSkillType } from '@/lib/types';
 import { getId } from '@/lib/utils/helper';
 
-import { ListItem, ShowLottie, SkillIcon } from '@/components';
-
-import { motion, MotionProps } from 'framer-motion';
+// Dynamically import ShowLottie so it never runs on the server
+const ShowLottie = dynamic(() => import('@/components/ui/ShowLottie'), {
+  ssr: false,
+});
 
 type Props = {
   lottie?: any;
@@ -14,14 +19,7 @@ type Props = {
   className?: string;
 } & MotionProps;
 
-const Skill = ({
-  lottie,
-  title,
-  skills,
-  points,
-  className = '',
-  ...rest
-}: Props) => {
+const Skill = ({ lottie, title, skills, points, className = '', ...rest }: Props) => {
   return (
     <motion.div
       className={`flex gap-8 sm:gap-10 flex-col lg:flex-row items-center ${className}`}
@@ -45,6 +43,7 @@ const Skill = ({
           ))}
         </ul>
       </div>
+
       {/* Right */}
       <ShowLottie path={lottie} className="md:min-h-[448px] md:min-w-[448px]" />
     </motion.div>

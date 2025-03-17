@@ -1,69 +1,39 @@
 'use client';
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
 
-const initialState = {
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+
+const ThemeContext = createContext({
   isDarkMode: false,
-  toggle: () => {
-    return;
-  },
-  enableDarkMode: (_: boolean) => {
-    return;
-  },
-  disableDarkMode: (_: boolean) => {
-    return;
-  },
-};
+  toggle: () => { },
+  enableDarkMode: () => { },
+  disableDarkMode: () => { },
+});
 
-const ThemeContext = createContext(initialState);
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-export default function ThemeProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(
-    typeof window !== 'undefined' &&
-      JSON.parse(localStorage.getItem('darkMode') || 'true')
-      ? true
-      : false
-  );
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  const toggle = useCallback(() => {
-    setIsDarkMode((prev) => !prev);
-  }, []);
-
-  const enableDarkMode = useCallback(() => {
-    setIsDarkMode(true);
-  }, []);
-
-  const disableDarkMode = useCallback(() => {
-    setIsDarkMode(false);
+    if (savedTheme) {
+      setIsDarkMode(JSON.parse(savedTheme));
+    } else {
+      setIsDarkMode(prefersDark);
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
 
+  const toggle = useCallback(() => setIsDarkMode((prev) => !prev), []);
+  const enableDarkMode = useCallback(() => setIsDarkMode(true), []);
+  const disableDarkMode = useCallback(() => setIsDarkMode(false), []);
+
   return (
-    <ThemeContext.Provider
-      value={{
-        isDarkMode,
-        toggle,
-        enableDarkMode,
-        disableDarkMode,
-      }}
-    >
+    <ThemeContext.Provider value={{ isDarkMode, toggle, enableDarkMode, disableDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );

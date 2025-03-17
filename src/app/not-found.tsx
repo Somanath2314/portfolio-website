@@ -1,7 +1,13 @@
-import { Button, ShowLottie } from '@/components';
+import dynamic from 'next/dynamic';
+import { Button } from '@/components';
 import { Layout } from '@/containers';
 
-const NotFound = () => {
+// Dynamically import ShowLottie so it's never server-rendered
+const ShowLottie = dynamic(() => import('@/components/ui/ShowLottie'), {
+  ssr: false,
+});
+
+export default function NotFound() {
   return (
     <Layout className="grid h-screen place-items-center">
       <div className="w-full max-w-xl text-center">
@@ -17,6 +23,4 @@ const NotFound = () => {
       </div>
     </Layout>
   );
-};
-
-export default NotFound;
+}

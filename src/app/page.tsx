@@ -2,13 +2,13 @@ import {
   About,
   Contact,
   Experience,
-  FeaturedProjects,
   Hero,
   Layout,
   Projects,
   Skills,
 } from '@/containers';
 
+import dynamic from 'next/dynamic';
 import type { NextPage } from 'next';
 
 /**
@@ -16,6 +16,12 @@ import type { NextPage } from 'next';
  * TODO: Switch to next13 app dir feature, when lottie files start working in app dir
  * TODO: Try test cases
  */
+
+// Dynamically import the FeaturedProjects container
+// This ensures any "document" references won't run on the server
+const FeaturedProjects = dynamic(() => import('@/containers/FeaturedProjects'), {
+  ssr: false, // <--- Disables server-side rendering for FeaturedProjects
+});
 
 const Home: NextPage = () => {
   return (
@@ -25,6 +31,7 @@ const Home: NextPage = () => {
         <About />
         <Skills />
         <Experience />
+        {/* Now rendered client-side only, preventing "document is not defined" */}
         <FeaturedProjects />
         <Projects />
         <Contact />
