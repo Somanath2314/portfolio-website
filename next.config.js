@@ -2,6 +2,11 @@
 module.exports = {
   reactStrictMode: true,
   images: {
+    domains: [
+      'raw.githubusercontent.com',
+      'github.com', // ✅ Add this
+      'user-images.githubusercontent.com',
+    ],
     remotePatterns: [
       {
         protocol: 'https',
@@ -10,27 +15,12 @@ module.exports = {
       },
       {
         protocol: 'https',
-        hostname: 'www.getlifegard.com',
+        hostname: 'github.com', // ✅ Add this pattern
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'www.valuemetrix.io',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'github-production-user-asset-6210df.s3.amazonaws.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.postimg.cc',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'buttons-animations-kv.vercel.app',
+        hostname: 'raw.githubusercontent.com',
         pathname: '/**',
       },
     ],

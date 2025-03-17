@@ -34,12 +34,13 @@ export type ProjectType = {
   repo: string;
 };
 
-export interface FeaturedProjectType extends Omit<ProjectType, 'year' | 'repo'> {
-  description: string;
-  repo?: string;  // GitHub repository URL (optional)
-  tasks?: string; // Project tasks/responsibilities
-  githubUrl?: string; // Alternative GitHub URL field if needed
-  liveUrl?: string; // Alternative live site URL if needed
+export interface FeaturedProjectType
+  extends Omit<ProjectType, 'year' | 'repo'> {
+  description: string
+  repo?: string
+  tasks?: string
+  liveUrl?: string
+  githubUrl?: string
 }
 
 export type StringKeyValueType = {

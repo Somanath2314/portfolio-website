@@ -6,62 +6,63 @@ const featuredProjectsSection: FeaturedProjectsSectionType = {
   projects: [
     {
       id: getId(),
-      name: 'GetLifeGuard',
-      description: 'An E-Commerce platform for Self-Defense Keychain.',
+      name: 'Front Flow',
+      description: 'E-commerce API Platform providing streamlined access to product data via RESTful APIs.',
       tasks:
-        "As a freelancer, I understood the client's requirements and executed a plan to develop and design an e-commerce platform, including the frontend UI, backend setup with database, APIs, and integration with payment platforms.",
-      url: 'https://www.getlifegard.com/',
-      img: 'https://www.getlifegard.com/images/og.png',
-      tags: [
-        'NextJs 14',
-        'TypeScript',
-        'TailwindCSS',
-        'ShadCN',
-        'Prisma',
-        'Stripe',
-      ],
+        '• Built a full-stack web application with Node.js and MongoDB.\n' +
+        '• Reduced dev time by 20% through efficient API architecture & documentation.\n' +
+        '• Implemented user authentication, data validation, and error handling.',
+      url: 'https://github.com/Somanath2314/front-flow', // or wherever the repo/demo is
+      img: '/projectImages/frontflow/image.png', // placeholder – replace if you have a real image
+      tags: ['Node.js', 'MongoDB', 'Express.js', 'REST APIs'],
+      liveUrl: 'https://front-flow-frontend-v1.vercel.app/',
+      githubUrl: 'https://github.com/Somanath2314/Ecommerce-product-details',
     },
     {
       id: getId(),
-      name: 'Valuemetrix',
-      description: 'An AI Powered Investment Platform.',
-      tasks:
-        'I strategically planned project milestones, led a cross-functional team, established a design system, developed the website, and integrated Stripe payments with secure authentication.',
-      url: 'https://www.valuemetrix.io/',
-      img: 'https://www.valuemetrix.io/images/og.png',
-      tags: ['AI/ML', 'NextJs', 'TypeScript', 'TailwindCSS', 'Prisma'],
-    },
-    {
-      id: getId(),
-      name: 'Velvi Matrimony',
+      name: 'Edu-Streamliners',
       description:
-        'A platform that redefines the way individuals find their life partners.',
+        'A streamlined educational management platform for modern schools.',
       tasks:
-        'As a freelancer, I developed this project by planning, communicating with the client, gathering feedback, implementing UI & pages, and integrating real-time data fetching with filtering functionality.',
-      url: 'https://velvi.vercel.app/',
-      img: 'https://i.postimg.cc/tRS4GvzJ/Screenshot-2024-02-27-at-5-48-49-PM.png',
-      tags: ['NextJs', 'TypeScript', 'TailwindCSS', 'APIs'],
+        '• Dashboard analytics, attendance tracking, timetable management, role-based access.\n' +
+        '• Built with MERN stack (MongoDB, Express.js, React, Node.js).',
+      url: 'https://hackathon-frontend-lime.vercel.app/',
+      img: '/projectImages/edustreamliners/image.png', // placeholder – replace if you have a real image
+      // placeholder
+      tags: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+      liveUrl: 'https://hackathon-frontend-lime.vercel.app/',
+      githubUrl: 'https://github.com/Visheshpgowda/Hackthon',
     },
-    /*   {
-      id: getId(),
-      name: 'Integra',
-      description: 'An AI-Powered Leads Generation Platform.',
-      tasks:
-        'I strategically planned project milestones, led a cross-functional team, established a design system, developed the website, and integrated Stripe payments with secure authentication.',
-      url: 'https://www.integraleads.xyz/',
-      img: 'https://user-images.githubusercontent.com/68834718/279476369-2f69466a-71db-4da0-9afd-04f8f0efb621.jpeg',
-      tags: ['AI/ML', 'NextJs', 'TypeScript', 'TailwindCSS', 'Express'],
-    }, */
-
     {
       id: getId(),
-      name: 'Drafton',
-      description: 'The AI-powered platform that simplifies proposal creation.',
+      name: 'Arogya Vahini (Chronic Disease Prediction System)',
+      description:
+        'ML-powered prediction for asthma, diabetes, stroke, and heart disease risks.',
       tasks:
-        'I designed and developed the landing page and implemented the dashboard by creating a user interface and integrating APIs.',
-      url: 'https://www.drafton.io/',
-      img: 'https://i.postimg.cc/4N6dsGcm/Screenshot-2024-06-17-at-11-05-22-PM.png',
-      tags: ['Open AI', 'NextJs', 'TypeScript', 'TailwindCSS', 'Prisma'],
+        '• Multi-disease prediction using ensemble learning models.\n' +
+        '• Built with React, Flask, XGBoost, and Neural Networks.\n' +
+        '• User-friendly interface for quick diagnosis.',
+      url: 'https://disease-prediction-app.vercel.app/',
+      img: '/projectImages/arogya/image.png', // placeholder – replace if you have a real image
+      // placeholder
+      tags: ['React', 'Flask', 'XGBoost', 'Neural Networks'],
+      liveUrl: 'https://disease-prediction-app.vercel.app/',
+      githubUrl: 'https://github.com/Somanath2314/disease-prediction-app',
+    },
+    {
+      id: getId(),
+      name: 'Vehicle Parking Spot Booking Web App',
+      description:
+        'Smart parking solution that digitizes campus parking management.',
+      tasks:
+        '• Real-time spot availability, QR code validation, booking system, admin analytics.\n' +
+        '• Built with Node.js, Express.js, MongoDB Atlas, and JWT.',
+      url: 'https://github.com/Visheshpgowda/ParkingslotsProject',
+      img: '/projectImages/parking/image.png', // placeholder – replace if you have a real image
+      // placeholder
+      tags: ['Node.js', 'Express.js', 'MongoDB', 'JWT'],
+      liveUrl: '#',
+      githubUrl: 'https://github.com/Visheshpgowda/ParkingslotsProject',
     },
   ],
 };

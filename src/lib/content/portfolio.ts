@@ -12,6 +12,7 @@ export const socialLinks: StringKeyValueType = {
   twitter: '#',
   github: 'https://github.com/Somanath2314',
   linkedin: 'https://www.linkedin.com/in/somanath-mikali-0a6485259/',
+  leetcode: 'https://leetcode.com/u/SOMANATHmikali/'
 };
 
 export const author = {

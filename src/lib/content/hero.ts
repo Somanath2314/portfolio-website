@@ -6,7 +6,7 @@ export const heroSection: HeroSectionType = {
   title: 'Somanath Mikali.',
   tagline: 'I create web-apps that solve the real life problems.',
   description:
-    "I'm a passionate Full-Stack web developer with hands-on experience in building web applications using MERN STACK",
+    "I'm a passionate Full-Stack web developer with hands-on experience in building web applications using MERN STACK, previously worked on flutter for building mobile apps",
   specialText: 'Currently available for freelance',
   cta: {
     title: 'see my resume',

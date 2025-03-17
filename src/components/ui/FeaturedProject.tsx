@@ -1,227 +1,128 @@
-import { FeaturedProjectType } from '@/lib/types';
-import { blurImageURL } from '@/lib/utils/config';
-import { cn } from '@/lib/utils/helper';
+'use client';
 
-import { Icon } from '@iconify/react';
-import { motion, MotionProps } from 'framer-motion';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
-interface Props extends FeaturedProjectType, MotionProps {
-  align?: 'left' | 'right';
+interface FeaturedProjectProps {
+  align: 'left' | 'right';
+  name: string;
+  description: string;
+  tasks?: string;
+  img: string;
+  tags: string[];
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 const FeaturedProject = ({
-  img,
+  align,
   name,
-  url,
-  repo,
   description,
   tasks,
+  img,
   tags,
-  align = 'left',
-  ...rest
-}: Props) => {
+  liveUrl,
+  githubUrl,
+}: FeaturedProjectProps) => {
   return (
-    <>
-      <motion.div
-        className={cn(
-          'relative hidden lg:block  min-h-[280px] sm:min-h-[360px] h-full overflow-hidden lg:overflow-visible rounded-lg lg:rounded-xl shadow-lg lg:shadow-none text-center lg:text-right',
-          align === 'left' && 'lg:text-left'
-        )}
-        {...rest}
-      >
-        <div
-          className={cn(
-            'w-full lg:max-w-[60%] absolute inset-0 h-full -z-20 lg:z-0 lg:object-contain rounded overflow-hidden shadow-2xl group',
+    <motion.div
+      className={`relative grid grid-cols-12 items-center gap-6 md:gap-12 rounded-xl bg-gray-900 p-6 shadow-lg ${align === 'right' ? '' : 'direction-rtl'
+        }`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Text Section */}
+      <div className="col-span-12 text-center md:col-span-6 md:text-left lg:col-span-5 space-y-4">
+        <p className="font-mono text-blue-400 text-sm uppercase tracking-wide">
+          Featured Project
+        </p>
 
-            align === 'left' && 'ml-auto'
-          )}
-        >
-          <Image
-            src={img}
-            alt={name}
-            width={720}
-            height={480}
-            className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-105"
-            placeholder="blur"
-            blurDataURL={blurImageURL}
-          />
-          <Link
-            href={`${url}`}
-            target="_blank"
-            className="absolute inset-0 z-10 block bg-transparent"
-          />
+        <h3 className="text-2xl font-bold text-white">{name}</h3>
+
+        <div className="relative z-20 rounded-lg bg-gray-800 p-5 text-left shadow-xl md:p-6">
+          <p className="text-gray-300 leading-relaxed">{description}</p>
         </div>
-        <div
-          className={cn(
-            'lg:max-w-[45%] space-y-2 lg:space-y-5 w-full h-full p-5 lg:p-0',
-            'absolute lg:top-1/2 lg:-translate-y-1/2 lg:right-0',
-            'lg:h-auto left-0 lg:left-auto top-0 right-auto lg:bg-none lg:text-inherit',
-            'flex flex-col justify-end',
-            'bg-gradient-to-t from-black/80 group-hover:from-accent group-focus:from-accent',
-            align === 'left' && 'lg:left-0'
-          )}
-        >
-          <div>
-            <div className="font-mono hidden lg:block text-accent capitalize text-xs lg:mb-2.5">
-              featured project
-            </div>
-            <h2 className="heading-tertiary !text-white lg:!text-dark-2 !font-semibold lg:!font-normal !normal-case">
-              <a
-                href={url}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                {name}
-              </a>
-            </h2>
-          </div>
 
-          <div className="rounded-sm lg:bg-bg-secondary lg:shadow-lg lg:p-5">
-            <div
-              className={cn(
-                'lg:max-w-sm text-dark-1 lg:text-inherit text-sm lg:text-base',
-                align === 'right' && 'ml-auto'
-              )}
-            >
-              <p className="text-dark-1">{description}</p>
-              <div className="hidden my-3 font-mono text-xs capitalize lg:block text-accent lg:my-2 lg:mt-3">
-                tasks / achievements
-              </div>
-              <div className="hidden text-base lg:block lg:text-sm">
-                {tasks}
-              </div>
-            </div>
-          </div>
-
-          <p
-            className={cn(
-              'font-mono text-[10px] text-accent lg:text-accent lg:text-xs justify-center capitalize flex flex-wrap gap-2 lg:gap-x-5 items-center lg:justify-end',
-              align === 'left' && 'lg:justify-start'
-            )}
-          >
-            {tags.map((tag) => (
-              <span key={tag.replaceAll(' ', '')}>{tag}</span>
+        {/* Tasks */}
+        {tasks && (
+          <div className="text-gray-400 text-sm space-y-1">
+            {tasks.split('\n').map((task, i) => (
+              <p key={i}>• {task.trim()}</p>
             ))}
-          </p>
-
-          {repo && (
-            <div
-              className={cn(
-                'flex lg:justify-end items-center gap-3',
-                align === 'left' && 'lg:justify-start'
-              )}
-            >
-              <a
-                href={repo}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                <Icon icon="tabler:brand-github" width={22} height={22} />
-              </a>
-              <a
-                href={url}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                <Icon icon="ci:external-link" width={24} height={24} />
-              </a>
-            </div>
-          )}
-        </div>
-      </motion.div>
-
-      {/* For mobile */}
-      <motion.div
-        className={cn(
-          'relative lg:hidden min-h-[300px] h-full rounded-xl shadow-lg lg:shadow-none text-center'
+          </div>
         )}
-        {...rest}
-      >
-        {/* Image Header */}
-        <header className={cn('w-full')}>
-          <Image
-            src={img}
-            alt={name}
-            width={720}
-            height={480}
-            className="object-cover w-full h-full transition-transform duration-200 group-hover:scale-105"
-            placeholder="blur"
-            blurDataURL={blurImageURL}
-          />
-          <Link
-            href={`${url}`}
-            target="_blank"
-            className="absolute inset-0 z-10 block bg-transparent"
-          />
-        </header>
 
-        <div className={cn('bg-bg-secondary p-5 space-y-2')}>
-          <div>
-            {/* <div className="font-mono text-accent capitalize text-xs lg:mb-2.5">
-              featured project
-            </div> */}
-            <h2 className="heading-tertiary !text-white !font-semibold !normal-case">
-              <a
-                href={url}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                {name}
-              </a>
-            </h2>
-          </div>
-
-          <div className={cn('text-dark-1 space-y-2 text-sm')}>
-            <p className="text-base text-dark-1">{description}</p>
-            <div className="hidden my-3 font-mono text-xs capitalize lg:block text-accent lg:my-2 lg:mt-3">
-              tasks / achievements
-            </div>
-            <div className="mb-2 space-y-1">
-              {tasks?.split(',').map((task) => (
-                <div key={task.slice(0, 10)}>{task}</div>
-              ))}
-            </div>
-          </div>
-
-          <p
-            className={cn(
-              'font-mono text-[10px] text-accent lg:text-accent lg:text-xs justify-center capitalize flex flex-wrap gap-2 lg:gap-x-5 items-center lg:justify-end',
-              align === 'left' && 'lg:justify-start'
-            )}
-          >
-            {tags.map((tag) => (
-              <span key={tag.replaceAll(' ', '')}>{tag}</span>
-            ))}
-          </p>
-
-          {repo && (
-            <div
-              className={cn(
-                'flex lg:justify-end items-center gap-3',
-                align === 'left' && 'lg:justify-start'
-              )}
+        {/* Tags */}
+        <ul className="mt-4 flex flex-wrap gap-4 justify-center md:justify-start">
+          {(tags ?? []).map((tag) => (
+            <li
+              key={tag}
+              className="font-mono text-xs text-gray-400 bg-gray-800 px-2 py-1 rounded"
             >
-              <a
-                href={repo}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                <Icon icon="tabler:brand-github" width={22} height={22} />
-              </a>
-              <a
-                href={url}
-                className="block duration-200 hover:text-accent"
-                target="_blank"
-              >
-                <Icon icon="ci:external-link" width={24} height={24} />
-              </a>
-            </div>
+              {tag}
+            </li>
+          ))}
+        </ul>
+
+        {/* Buttons */}
+        <div className="mt-4 flex gap-4 justify-center md:justify-start">
+          {githubUrl && (
+            <Link
+              href={githubUrl}
+              target="_blank"
+              className="px-4 py-2 rounded-md bg-gray-700 text-white hover:bg-gray-600 transition-colors flex items-center gap-2"
+              aria-label={`GitHub link for ${name}`}
+            >
+              <FiGithub size={18} />
+              <span>View Code</span>
+            </Link>
+          )}
+          {liveUrl && (
+            <Link
+              href={liveUrl}
+              target="_blank"
+              className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-500 transition-colors flex items-center gap-2"
+              aria-label={`Live site link for ${name}`}
+            >
+              <FiExternalLink size={18} />
+              <span>View Live</span>
+            </Link>
           )}
         </div>
-      </motion.div>
-    </>
+      </div>
+
+      {/* Image Section */}
+      <div
+        className={`col-span-12 md:col-span-6 lg:col-span-7 ${align === 'right' ? 'md:order-1' : 'md:order-0'
+          }`}
+      >
+        {liveUrl ? (
+          <Link href={liveUrl} target="_blank" aria-label={`View ${name} project`}>
+            <div className="relative w-full h-60 md:h-80 overflow-hidden rounded-lg">
+              <Image
+                src={img}
+                alt={name}
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+              />
+            </div>
+          </Link>
+        ) : (
+          <div className="relative w-full h-60 md:h-80 overflow-hidden rounded-lg">
+            <Image
+              src={img}
+              alt={name}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 };
 

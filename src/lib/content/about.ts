@@ -10,11 +10,11 @@ export const aboutSection: AboutSectionType = {
       'MongoDb',
       'ExpressJs',
       'JAVA',
-      'ExpressJs',
       'React',
       'NodeJs',
       'Cloud Computing',
-      'Machine Learning'
+      'Machine Learning',
+      'Flutter'
     ],
   },
   img: '/somanath-mikali.jpeg',
